@@ -1,0 +1,48 @@
+<div class="h-100 pt-4 d-flex justify-content-center align-items-center">
+    <mat-card class="w-50 p-4">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <h2 class="text-center">Register</h2>
+            <mat-card-content>
+                <mat-form-field class="d-block">
+                    <input matInput placeholder="Username *" formControlName="username" name="username">
+                    <mat-error *ngIf="!!form.username.errors">
+                        <span *ngIf="!!form.username.errors.required">Mandatory field</span>
+                        <span *ngIf="!form.username.errors.required && !!form.username.errors.userExists">User already exists</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="d-block">
+                    <input matInput placeholder="Email *" formControlName="email" name="email">
+                    <mat-error *ngIf="!!form.email.errors">
+                        <span *ngIf="!!form.email.errors.required">Mandatory field</span>
+                        <span *ngIf="!form.email.errors.required && !!form.email.errors.emailExists">Email already exists</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <div formGroupName="passwords">
+                    <mat-form-field class="d-block">
+                        <input matInput type="password" placeholder="Password *" formControlName="password">
+                        <mat-error *ngIf="!!passwords.password.errors">
+                            <span *ngIf="!!passwords.password.errors.required">Mandatory field</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="d-block">
+                        <input matInput type="password" placeholder="Repeat password *" formControlName="repeat">
+                        <mat-error *ngIf="!!passwords.repeat.errors">
+                            <span *ngIf="!!passwords.repeat.errors.required">Mandatory field</span>
+                            <span
+                                *ngIf="!passwords.repeat.errors.required && !!passwords.repeat.errors.MatchFields">Passwords
+                                don't match</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+            <mat-card-actions class="text-center">
+                <button mat-raised-button type="submit" color="primary"
+                    class="d-block w-25 mx-auto mb-2 on-hover-box-shadow" [disabled]="!registerForm.valid">Register</button>
+                <span>Already have an account ? <a [routerLink]="['/login']">login</a> here</span>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

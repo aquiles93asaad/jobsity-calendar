@@ -1,0 +1,66 @@
+<div class="py-4 position-relative">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="d-flex justify-content-start">
+                <button mat-raised-button color="primary" class="on-hover-box-shadow mr-3" mwlCalendarPreviousView
+                    [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()"
+                    matTooltip="Previous" matTooltipPosition="below">
+                    <i class="material-icons">
+                        chevron_left
+                    </i>
+                </button>
+
+                <button mat-raised-button color="primary" class="on-hover-box-shadow mr-3" mwlCalendarToday
+                    [(viewDate)]="viewDate">
+                    Today
+                </button>
+
+                <button mat-raised-button color="primary" class="on-hover-box-shadow" mwlCalendarNextView [view]="view"
+                    [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+                    <i class="material-icons" matTooltip="Next" matTooltipPosition="below">
+                        chevron_right
+                    </i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex justify-content-end">
+                <button mat-raised-button color="primary" class="on-hover-box-shadow"
+                    (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+                    Month
+                </button>
+                <button mat-raised-button color="primary" class="on-hover-box-shadow ml-3"
+                    (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+                    Week
+                </button>
+                <button mat-raised-button color="primary" class="on-hover-box-shadow ml-3"
+                    (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                    Day
+                </button>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+            [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+            [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+            [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+    </div>
+    <button mat-mini-fab class="position-fixed new-reminder-btn on-hover-box-shadow" color="primary" matTooltip="Add a reminder" matTooltipPosition="left" (click)="openDialog()">
+        <i class="material-icons">
+            add
+        </i>
+    </button>
+</div>

@@ -1,0 +1,48 @@
+<h1 mat-dialog-title class="text-center">{{title}}</h1>
+<form [formGroup]="reminderForm">
+    <mat-form-field class="d-block mb-4">
+        <input matInput placeholder="Title *" formControlName="title" name="title" maxlength="30">
+        <mat-error *ngIf="!!form.title.errors">
+            <span *ngIf="!!form.title.errors.required">Mandatory field</span>
+            <span *ngIf="!form.title.errors.required && !!form.title.errors.maxLength">30 characters max</span>
+        </mat-error>
+        <mat-hint align="start">30 characters allowed</mat-hint>
+    </mat-form-field>
+
+    <div class="mb-4">
+        <div class="mb-2">Reminder Color:</div>
+        <mat-button-toggle-group #group="matButtonToggleGroup" formControlName="color" ngDefaultControl
+            class="w-100 d-flex justify-content-between border-0">
+            <mat-button-toggle *ngFor="let color of colors" [value]="color.value"
+                [ngStyle]="{'background-color': color.value}" matTooltip="{{color.label}}" matTooltipPosition="below"
+                class="on-hover-box-shadow">
+            <i class="material-icons">
+                check
+            </i>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+
+    <mat-form-field class="w-50 pr-2">
+        <input matInput [matDatepicker]="picker" placeholder="Reminder Date" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="!!form.startDate.errors">
+            <span *ngIf="!!form.startDate.errors.required">Mandatory field</span>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-50 pl-2">
+        <input matInput type="time" placeholder="Reminder Time" formControlName="startDateTime">
+        <mat-error *ngIf="!!form.startDateTime.errors">
+            <span *ngIf="!!form.startDateTime.errors.required">Mandatory field</span>
+        </mat-error>
+    </mat-form-field>
+</form>
+
+<div mat-dialog-actions align="center">
+    <button mat-raised-button type="submit" (click)="closeDialog()" color="primary"
+        class="mr-3 on-hover-box-shadow">Cancel</button>
+    <button mat-raised-button type="submit" (click)="save()" color="primary" class="mr-3 on-hover-box-shadow"
+        [disabled]="!reminderForm.valid">Save</button>
+</div>

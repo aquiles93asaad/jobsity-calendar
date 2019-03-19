@@ -1,0 +1,30 @@
+:host /deep/ {
+    .mat-button-toggle-group {
+        overflow: visible;
+
+        .mat-button-toggle {
+            border-radius: 5px;
+
+            i {
+                display: none;
+                position: absolute;
+                color: white;
+                top: -13px;
+                left: 2px;
+                font-size: 18px;
+            }
+        }
+
+        .mat-button-toggle-checked {
+            box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.6);
+
+            i {
+                display: inline;
+            }
+        }
+
+        button:focus {
+            outline: none;
+        }
+    }
+}

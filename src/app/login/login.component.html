@@ -1,0 +1,30 @@
+<div class="h-100 pt-4 d-flex justify-content-center align-items-center">
+    <mat-card class="w-50 p-4">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <h2 class="text-center">Login</h2>
+            <mat-card-content>
+                <mat-form-field class="d-block">
+                    <input matInput placeholder="Email or Username *" formControlName="username" name="username">
+                    <mat-error *ngIf="!!form.username.errors">
+                        <span *ngIf="!!form.username.errors.required">Mandatory field</span>
+                        <span *ngIf="!form.username.errors.required && !!form.username.errors.userExists">User doesn't exist</span>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="d-block">
+                    <input matInput placeholder="Password *" type="password" formControlName="password" name="password">
+                    <mat-error *ngIf="!!form.password.errors">
+                        <span *ngIf="!!form.password.errors.required">Mandatory field</span>
+                        <span *ngIf="!form.password.errors.required && !!form.password.errors.wrongPass">Wrong password</span>
+                    </mat-error>
+                </mat-form-field>
+
+            </mat-card-content>
+            <mat-card-actions class="text-center">
+                <button mat-raised-button type="submit" color="primary" class="d-block w-25 mx-auto mb-2 on-hover-box-shadow"
+                    [disabled]="!loginForm.valid">Login</button>
+                <span>Don't have an account ? <a [routerLink]="['/register']">register</a> here</span>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

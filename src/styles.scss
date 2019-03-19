@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/theming';
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+$custom-typography: mat-typography-config(
+    $font-family: 'Exo'
+);
+
+$jc-blue: (
+    100: #6cc0e4,
+    500: #6cc0e4,
+    700: #6cc0e4,
+    contrast: (
+        100: $dark-primary-text,
+        500: $light-primary-text,
+        700: $light-primary-text,
+    )
+);
+
+$mat-black: (
+    100: #000,
+    500: #000,
+    700: #000,
+    contrast: (
+        100: $dark-primary-text,
+        500: $light-primary-text,
+        700: $light-primary-text,
+    )
+);
+
+@include mat-core($custom-typography);
+
+$primary: mat-palette($jc-blue);
+$accent: mat-palette($mat-black);
+$warn: mat-palette($mat-deep-orange);
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+
+body {
+    background-color: #f4f3f3;
+    margin: 0;
+
+    app-root * {
+        font-family: 'Exo', sans-serif;
+    }
+
+    .on-hover-box-shadow:not(:disabled) {
+        &:hover {
+            box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+        }
+    }
+}
