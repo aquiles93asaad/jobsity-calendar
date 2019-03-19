@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../core/services';
 
@@ -14,14 +14,26 @@ export class HeaderComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute,
     ) { }
 
     ngOnInit() {
+        if(!this.user) {
+            this.route.queryParams
+            .subscribe(
+                params => {
+                    if( params['user'] ){
+                        this.user = JSON.parse(params['user']);
+                    }
+                }
+            );
+        }
     }
 
     logout(): void {
         this.authService.signOut();
+        this.user = null;
         this.navigate('/login');
     }
 

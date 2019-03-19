@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
                     this.loginForm.get('password').setErrors({ wrongPass: true });
 
                 if(data.user)
-                    this.router.navigate(['']);
+                    this.router.navigate([''], { queryParams: { user: JSON.stringify(data.user) }});
             }
         )
     }

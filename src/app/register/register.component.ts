@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
                     this.registerForm.get('email').setErrors({ emailExists: true });
 
                 if(data.user)
-                    this.router.navigate(['']);
+                    this.router.navigate([''], { queryParams: { user: JSON.stringify(data.user) }});
             }
         )
     }
