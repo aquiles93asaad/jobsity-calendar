@@ -169,10 +169,10 @@ export class CalendarComponent implements OnInit {
         this.activeDayIsOpen = false;
     }
 
-    openDialog(reminder: Reminder) {
+    openDialog(reminder?: Reminder) {
         const dialogRef = this.matDialog.open(ReminderModalComponent, {
-            height: '80%',
-            width: '50%',
+            height: (window.innerHeight <= 600) ? '90%' : (window.innerHeight <= 700) ? '80%' : (window.innerHeight <= 800) ? '70%' : (window.innerHeight <= 900) ? '60%' : '50%',
+            width: (window.innerWidth <= 600) ? '80%' : (window.innerWidth <= 992) ? '70%' : (window.innerWidth <= 1400) ? '60%' : (window.innerWidth > 1400) ? '50%' : '50%',
             panelClass: 'p-3',
             data: reminder
         });
