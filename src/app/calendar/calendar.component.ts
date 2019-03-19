@@ -212,25 +212,26 @@ export class CalendarComponent implements OnInit {
 
     handleReminders(reminders){
         this.events = [];
-        for (let i = 0; i < reminders.length; i++) {
-            const reminder: CalendarEvent = {
-                id: reminders[i].id,
-                start: new Date(reminders[i].startDate),
-                end: new Date(reminders[i].startDate),
-                title: reminders[i].title,
-                color: {
-                    primary: reminders[i].color,
-                    secondary: '#fff'
-                },
-                actions: this.actions,
-                allDay: false,
-                resizable: {
-                    beforeStart: false,
-                    afterEnd: false
-                },
-                draggable: false
-            };
-            this.events.push(reminder);
-        }
+        if(reminders)
+            for (let i = 0; i < reminders.length; i++) {
+                const reminder: CalendarEvent = {
+                    id: reminders[i].id,
+                    start: new Date(reminders[i].startDate),
+                    end: new Date(reminders[i].startDate),
+                    title: reminders[i].title,
+                    color: {
+                        primary: reminders[i].color,
+                        secondary: '#fff'
+                    },
+                    actions: this.actions,
+                    allDay: false,
+                    resizable: {
+                        beforeStart: false,
+                        afterEnd: false
+                    },
+                    draggable: false
+                };
+                this.events.push(reminder);
+            }
     }
 }
